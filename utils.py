@@ -108,3 +108,84 @@ def get_spotify_df(filename):
     stream_hist_df.set_index("date", inplace=True)
 
     return stream_hist_df
+
+def decode_endTime_column(dataframe):
+    '''
+    decodes the endTime value of each song into an integer between 0 and 24, representing what hour of the day the song was listened to 
+    Parameter: dataframe to decod, must have a valid endTime column
+    Returns: nothing is returned, but dataframe passed in is updated
+    '''
+
+    for i in range(len(dataframe["endTime"])):
+        item_list = dataframe["endTime"][i].split(":")
+        if item_list[0] == "01":
+            dataframe["endTime"][i] = 1
+        elif item_list[0] == "02":
+            dataframe["endTime"][i] = 2
+        elif item_list[0] == "03":
+            dataframe["endTime"][i] = 3
+        elif item_list[0] == "04":
+            dataframe["endTime"][i] = 4
+        elif item_list[0] == "05":
+            dataframe["endTime"][i] = 5
+        elif item_list[0] == "06":
+            dataframe["endTime"][i] = 6
+        elif item_list[0] == "07":
+            dataframe["endTime"][i] = 7
+        elif item_list[0] == "08":
+            dataframe["endTime"][i] = 8
+        elif item_list[0] == "09":
+            dataframe["endTime"][i] = 9
+        elif item_list[0] == "10":
+            dataframe["endTime"][i] = 10
+        elif item_list[0] == "11":
+            dataframe["endTime"][i] = 11
+        elif item_list[0] == "12":
+            dataframe["endTime"][i] = 12
+        elif item_list[0] == "13":
+            dataframe["endTime"][i] = 13
+        elif item_list[0] == "14":
+            dataframe["endTime"][i] = 14
+        elif item_list[0] == "15":
+            dataframe["endTime"][i] = 15
+        elif item_list[0] == "16":
+            dataframe["endTime"][i] = 16
+        elif item_list[0] == "17":
+            dataframe["endTime"][i] = 17
+        elif item_list[0] == "18":
+            dataframe["endTime"][i] = 18
+        elif item_list[0] == "19":
+            dataframe["endTime"][i] = 19
+        elif item_list[0] == "20":
+            dataframe["endTime"][i] = 20
+        elif item_list[0] == "21":
+            dataframe["endTime"][i] = 21
+        elif item_list[0] == "22":
+            dataframe["endTime"][i] = 22
+        elif item_list[0] == "23":
+            dataframe["endTime"][i] = 23
+        elif item_list[0] == "24":
+            dataframe["endTime"][i] = 24
+        elif item_list[0] == "00":
+            dataframe["endTime"][i] = 0
+
+def print_avg_endtime_by_weekday_plot(dataframe, name):
+    '''
+    
+    '''
+    import matplotlib.pyplot as plt
+
+    groupedby_day = dataframe.groupby("Day of Week")
+    monday = groupedby_day.get_group("Monday")
+    tuesday = groupedby_day.get_group("Tuesday")
+    wednesday = groupedby_day.get_group("Wednesday")
+    thursday = groupedby_day.get_group("Thursday")
+    friday = groupedby_day.get_group("Friday")
+    saturday = groupedby_day.get_group("Saturday")
+    sunday = groupedby_day.get_group("Sunday")
+
+    plt.figure()
+    plt.scatter([1, 2, 3, 4, 5, 6, 7], [monday["endTime"].mean(), tuesday["endTime"].mean(), wednesday["endTime"].mean(), thursday["endTime"].mean(), friday["endTime"].mean(), saturday["endTime"].mean(), sunday["endTime"].mean()])
+    plt.xticks([1, 2, 3, 4, 5, 6, 7], ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"])
+    plt.ylabel("Average endTime (hour of day)")
+    plt.title(name + " Average endTime by Day of Week")
