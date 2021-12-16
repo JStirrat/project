@@ -171,7 +171,9 @@ def decode_endTime_column(dataframe):
 
 def print_avg_endtime_by_weekday_plot(dataframe, name):
     '''
-    
+    prints a graph containing data points of the average endTime value for each day of the week from the dataframe passed in
+    Parameters: dataframe containing relevant data, the name of the person's dataframe being passed in
+    Retuns: N/A, but grpah will be output
     '''
     import matplotlib.pyplot as plt
 
@@ -189,3 +191,27 @@ def print_avg_endtime_by_weekday_plot(dataframe, name):
     plt.xticks([1, 2, 3, 4, 5, 6, 7], ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"])
     plt.ylabel("Average endTime (hour of day)")
     plt.title(name + " Average endTime by Day of Week")
+
+def generate_wordcloud(column):
+    '''
+    Note: repurposed from NLP Yelp lecture in class
+    generates a wordcloud based on a column containing text values passed in 
+    Parameter: column of strings
+    Returns: N/A, but wordcloud will be generated
+    '''
+    from wordcloud import WordCloud
+    import matplotlib.pyplot as plt
+
+    data_str = ""
+
+    for i in range(len(column)):
+        data = column[i].strip("\"")
+        data_str = data_str + " " + data
+
+    wc = WordCloud(background_color="white", colormap="prism", random_state=0, collocations=False)
+    plt.figure()
+    plt.imshow(wc.generate(data_str))
+    plt.xticks([], [])
+    plt.yticks([], [])
+    plt.show()
+
