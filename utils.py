@@ -5,7 +5,7 @@ def get_weather():
 
 
     mapquest_url = "http://open.mapquestapi.com/geocoding/v1/address"
-    mapquest_api_key = "HxA92vY4cLZuqIg4YeLc90YKnU0UtIpu"
+    mapquest_api_key = "INSERT_MAPQUEST_API_KEY_HERE"
 
     mapquest_url += "?key="
     mapquest_url += mapquest_api_key
@@ -26,7 +26,7 @@ def get_weather():
     meteostat_station_url = "https://meteostat.p.rapidapi.com/stations/nearby"
     station_headers = {
         "x-rapid-host": "meteostat.p.rapidapi.com",
-        "x-rapidapi-key": "b998fb38e0msh5bdbc233f355651p1e58ccjsn9224f21113ce"
+        "x-rapidapi-key": "INSERT_RAPIDAPI_API_KEY_HERE"
     }
     query_string = {"lat": lat, "lon": lng}
 
@@ -48,7 +48,7 @@ def get_weather():
     querystring = {"station":station_id,"start":"2021-01-01","end":date,"units":"imperial"}
     headers = {
         'x-rapidapi-host': "meteostat.p.rapidapi.com",
-        'x-rapidapi-key': "b998fb38e0msh5bdbc233f355651p1e58ccjsn9224f21113ce"
+        'x-rapidapi-key': "INSERT_RAPIDAPI_API_KEY_HERE"
         }
 
     #put the dailyh weather data into a df
